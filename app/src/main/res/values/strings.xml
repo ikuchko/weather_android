@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="consumer_key">2ec0b9699813ee5d03c9ad3290334259</string>
 </resources>
