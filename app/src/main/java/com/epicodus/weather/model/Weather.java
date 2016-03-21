@@ -1,4 +1,4 @@
-package com.epicodus.weather;
+package com.epicodus.weather.model;
 
 /**
  * Created by Guest on 3/21/16.

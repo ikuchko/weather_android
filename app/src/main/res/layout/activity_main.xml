@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.epicodus.weather.MainActivity">
+    tools:context=".ui.MainActivity">
 
     <EditText
         android:layout_width="fill_parent"
@@ -23,6 +23,4 @@
         android:id="@+id/submitButton"
         android:layout_below="@+id/cityEditText"
         android:layout_centerHorizontal="true" />
-
-
 </RelativeLayout>

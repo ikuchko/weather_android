@@ -1,6 +1,9 @@
-package com.epicodus.weather;
+package com.epicodus.weather.services;
 
 import android.content.Context;
+
+import com.epicodus.weather.R;
+import com.epicodus.weather.model.Weather;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,8 +18,6 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
-import se.akerfeldt.okhttp.signpost.SigningInterceptor;
 
 /**
  * Created by Guest on 3/21/16.
@@ -65,10 +66,10 @@ public class WeatherService {
                     Double pressure = mainJSON.getDouble("pressure");
                     Integer humidity = mainJSON.getInt("humidity");
 
-                    JSONObject weatherJSON = weatherDetailedJSON.getJSONObject("weather");
-                    String mainWeather = weatherJSON.getString("main");
-                    String description = weatherJSON.getString("description");
-                    String icon = "http://openweathermap.org/img/w/" + weatherJSON.getString("icon") + ".png";
+                    JSONArray weatherJSON = weatherDetailedJSON.getJSONArray("weather");
+                    String mainWeather = weatherJSON.getJSONObject(0).getString("main");
+                    String description = weatherJSON.getJSONObject(0).getString("description");
+                    String icon = "http://openweathermap.org/img/w/" + weatherJSON.getJSONObject(0).getString("icon") + ".png";
 
                     JSONObject windJSON = weatherDetailedJSON.getJSONObject("wind");
                     Double speed = windJSON.getDouble("speed");
