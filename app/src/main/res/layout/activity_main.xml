@@ -23,4 +23,6 @@
         android:id="@+id/submitButton"
         android:layout_below="@+id/cityEditText"
         android:layout_centerHorizontal="true" />
+
+
 </RelativeLayout>

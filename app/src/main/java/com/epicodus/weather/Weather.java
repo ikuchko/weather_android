@@ -6,16 +6,17 @@ package com.epicodus.weather;
 public class Weather {
     private String mName;
     private String mDate;
-    private String mTempMain;
-    private String mTempMax;
-    private String mTempMin;
-    private String mHumidity;
-    private String mPressure;
+    private Double mTempMain;
+    private Double mTempMax;
+    private Double mTempMin;
+    private Integer mHumidity;
+    private Double mPressure;
     private String mMainWeather;
     private String mDescription;
-    private String mWindSpeed;
+    private Double mWindSpeed;
+    private String mIcon;
 
-    public Weather(String name, String date, String tempMain, String tempMax, String tempMin, String humidity, String pressure, String mainWeather, String description, String windSpeed) {
+    public Weather(String name, String date, Double tempMain, Double tempMax, Double tempMin, Integer humidity, Double pressure, String mainWeather, String description, Double windSpeed, String icon) {
         this.mName = name;
         this.mDate = date;
         this.mTempMain = tempMain;
@@ -26,41 +27,51 @@ public class Weather {
         this.mMainWeather = mainWeather;
         this.mDescription = description;
         this.mWindSpeed = windSpeed;
+        this.mIcon = icon;
     }
 
     public String getName() {
         return mName;
     }
 
-    public String getmTempMain() {
+    public String getDate() {
+        return mDate;
+    }
+
+    public Double getTempMain() {
         return mTempMain;
     }
 
-    public String getmTempMax() {
+    public Double getTempMax() {
         return mTempMax;
     }
 
-    public String getmTempMin() {
+    public Double getTempMin() {
         return mTempMin;
     }
 
-    public String getmHumidity() {
+    public Integer getHumidity() {
         return mHumidity;
     }
 
-    public String getmPressure() {
+    public Double getPressure() {
         return mPressure;
     }
 
-    public String getmMainWeather() {
+    public String getMainWeather() {
         return mMainWeather;
     }
 
-    public String getmDescription() {
+    public String getDescription() {
         return mDescription;
     }
 
-    public String getmWindSpeed() {
+    public Double getWindSpeed() {
         return mWindSpeed;
     }
+
+    public String getIcon() {
+        return mIcon;
+    }
+
 }
