@@ -2,8 +2,11 @@ package com.epicodus.weather.model;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.util.Log;
 
 import com.epicodus.weather.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by Guest on 3/21/16.
@@ -11,6 +14,7 @@ import com.epicodus.weather.R;
 public class Weather {
     private String mName;
     private String mDate;
+    private String mDayOfWeek;
     private Double mTempMain;
     private Double mTempMax;
     private Double mTempMin;
@@ -21,10 +25,12 @@ public class Weather {
     private Double mWindSpeed;
     private String mIcon;
     private Context mContext;
+    private static ArrayList<String> dayOfWeekList = new ArrayList<>();
 
-    public Weather(Context context, String name, String date, Double tempMain, Double tempMax, Double tempMin, Integer humidity, Double pressure, String mainWeather, String description, Double windSpeed, String icon) {
+    public Weather(Context context, String name, String date, String dayOfWeek, Double tempMain, Double tempMax, Double tempMin, Integer humidity, Double pressure, String mainWeather, String description, Double windSpeed, String icon) {
         this.mName = name;
         this.mDate = date;
+        this.mDayOfWeek = dayOfWeek;
         this.mTempMain = tempMain;
         this.mTempMax = tempMax;
         this.mTempMin = tempMin;
@@ -35,6 +41,16 @@ public class Weather {
         this.mWindSpeed = windSpeed;
         this.mIcon = icon;
         this.mContext = context;
+
+        Boolean flag = false;
+        for (int i=0; i<dayOfWeekList.size(); i++) {
+            if (dayOfWeekList.get(i).equals(dayOfWeek)) {
+                flag = true;
+            }
+        }
+        if (!flag) {
+            dayOfWeekList.add(dayOfWeek);
+        }
     }
 
     public String getName() {
@@ -81,13 +97,18 @@ public class Weather {
         return mIcon;
     }
 
+    public static ArrayList<String> getDayOfWeekList() {
+        return dayOfWeekList;
+    }
+
     public Integer getImageId() {
         Context context = mContext;
         TypedArray imageHashMap = mContext.getResources().obtainTypedArray(R.array.icons);
         TypedArray imageArray;
         for (int i=0; i<imageHashMap.length(); i++) {
             imageArray = mContext.getResources().obtainTypedArray(imageHashMap.getResourceId(i, -1));
-            if (imageArray.getString(0).toString() == mIcon) {
+            Log.d("icon: ", imageArray.getString(0).toString());
+            if (imageArray.getString(0).toString().equals(mIcon)) {
                 return imageArray.getResourceId(1, -1);
             }
         }

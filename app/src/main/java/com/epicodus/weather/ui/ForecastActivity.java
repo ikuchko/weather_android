@@ -6,13 +6,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 
 import com.epicodus.weather.R;
 import com.epicodus.weather.model.Weather;
-import com.epicodus.weather.services.WeatherAdapter;
+import com.epicodus.weather.adapters.WeatherAdapter;
 import com.epicodus.weather.services.WeatherService;
 
 import java.io.IOException;
@@ -66,7 +63,7 @@ public class ForecastActivity extends AppCompatActivity {
 
                         mAdapter = new WeatherAdapter(getApplicationContext(), mWeatherList);
                         recyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ForecastActivity.this);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ForecastActivity.this, LinearLayoutManager.HORIZONTAL, false);
                         recyclerView.setLayoutManager(layoutManager);
                         recyclerView.setHasFixedSize(true);
 

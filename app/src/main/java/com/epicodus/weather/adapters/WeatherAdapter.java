@@ -1,4 +1,4 @@
-package com.epicodus.weather.services;
+package com.epicodus.weather.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.epicodus.weather.R;
@@ -22,6 +21,7 @@ import butterknife.ButterKnife;
  */
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>{
     private ArrayList<Weather> weatherList = new ArrayList<>();
+    private ArrayList<String> dayOfWeekList = Weather.getDayOfWeekList();
     private Context context;
     private final LayoutInflater inflater;
 
@@ -40,14 +40,14 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherV
 
     @Override
     public void onBindViewHolder(WeatherAdapter.WeatherViewHolder holder, int position) {
-        holder.bindWeather(weatherList.get(position));
+        holder.bindWeather(dayOfWeekList.get(position));
         holder.dayRecycleView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
         holder.dayRecycleView.setAdapter(new DayAdapter(context, weatherList));
     }
 
     @Override
     public int getItemCount() {
-        return weatherList.size();
+        return dayOfWeekList.size();
     }
 
     public class WeatherViewHolder extends RecyclerView.ViewHolder {
@@ -59,8 +59,8 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherV
             ButterKnife.bind(this, itemView);
         }
 
-        public void bindWeather (Weather weather) {
-            dayTextView.setText (weather.getDate());
+        public void bindWeather (String dayOfWeek) {
+            dayTextView.setText (dayOfWeek);
         }
     }
 }

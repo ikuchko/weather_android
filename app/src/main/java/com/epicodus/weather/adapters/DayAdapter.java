@@ -1,4 +1,4 @@
-package com.epicodus.weather.services;
+package com.epicodus.weather.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -59,10 +59,10 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.DayViewHolder>{
         public void bindWeather (Weather weather) {
             hourTextView.setText(weather.getDate());
             temperatureTextView.setText(weather.getTempMain().toString());
-
+            Integer iconId = weather.getImageId();
             Picasso
                 .with(context)
-                .load(weather.getImageId())
+                .load(iconId)
                 .fit() // will explain later
                 .into(iconImageView);
         }

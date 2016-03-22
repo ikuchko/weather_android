@@ -1,6 +1,7 @@
 package com.epicodus.weather.services;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.epicodus.weather.R;
 import com.epicodus.weather.model.Weather;
@@ -11,6 +12,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import okhttp3.Call;
@@ -19,6 +22,9 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Guest on 3/21/16.
@@ -78,7 +84,17 @@ public class WeatherService {
 
                     String dateTime = weatherDetailedJSON.getString("dt_txt");
 
-                    Weather weather = new Weather(mContext, name, dateTime, tempMain, tempMax, tempMin, humidity, pressure, mainWeather, description, speed, icon);
+                    //get day of week from dateTime format
+                    String dayOfWeek = "";
+                    try {
+                        dayOfWeek = new SimpleDateFormat("E").format(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTime));
+                        Log.d("Day Of Week ", dayOfWeek);
+                    } catch (ParseException pe) {
+                        Log.e("Exception: ", pe.toString());
+                    }
+
+
+                    Weather weather = new Weather(mContext, name, dateTime, dayOfWeek, tempMain, tempMax, tempMin, humidity, pressure, mainWeather, description, speed, icon);
                     weatherList.add(weather);
                 }
             }
