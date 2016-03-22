@@ -67,17 +67,6 @@ public class ForecastActivity extends AppCompatActivity {
                         recyclerView.setLayoutManager(layoutManager);
                         recyclerView.setHasFixedSize(true);
 
-                        Log.i(TAG, "Name: " + mWeatherList.get(0).getName());
-                        Log.i(TAG, "Description: " + mWeatherList.get(0).getDescription());
-                        Log.i(TAG, "Date: " + mWeatherList.get(0).getDate());
-                        Log.i(TAG, "Icon: " + mWeatherList.get(0).getIcon());
-                        Log.i(TAG, "MainWeather: " + mWeatherList.get(0).getMainWeather());
-                        Log.i(TAG, "Humidity: " + mWeatherList.get(0).getHumidity());
-                        Log.i(TAG, "Pressure: " + mWeatherList.get(0).getPressure());
-                        Log.i(TAG, "TempMain: " + mWeatherList.get(0).getTempMain());
-                        Log.i(TAG, "TempMax: " + mWeatherList.get(0).getTempMax());
-                        Log.i(TAG, "TempMin: " + mWeatherList.get(0).getTempMin());
-                        Log.i(TAG, "WindSpeed: " + mWeatherList.get(0).getWindSpeed());
                     }
                 });
             }

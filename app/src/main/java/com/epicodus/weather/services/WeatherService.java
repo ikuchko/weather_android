@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.epicodus.weather.R;
+import com.epicodus.weather.model.CurrentWeather;
 import com.epicodus.weather.model.Weather;
 import com.epicodus.weather.ui.MainActivity;
 
@@ -23,8 +24,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by Guest on 3/21/16.
@@ -53,6 +52,53 @@ public class WeatherService {
 
         Call call = client.newCall(request);
         call.enqueue(callback);
+    }
+
+    public void findCurrentWeather(String location, Callback callback) {
+        String CONSUMER_KEY = mContext.getString(R.string.consumer_key);
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .build();
+
+        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://api.openweathermap.org/data/2.5/weather?&units=imperial&APPID=" + CONSUMER_KEY).newBuilder();
+        urlBuilder.addQueryParameter("q", location);
+        String url = urlBuilder.build().toString();
+
+        Request request= new Request.Builder()
+                .url(url)
+                .build();
+
+        Call call = client.newCall(request);
+        call.enqueue(callback);
+    }
+
+    public ArrayList<CurrentWeather> processCurrentWeatherResults(Response response) {
+        ArrayList<CurrentWeather> currentWeatherList = new ArrayList<>();
+
+        try {
+            String jsonData = response.body().string();
+            if (response.isSuccessful()) {
+                JSONObject responseJSON = new JSONObject(jsonData);
+                String name = responseJSON.getString("name");
+                JSONObject mainJSON = responseJSON.getJSONObject("main");
+                Double tempMain = mainJSON.getDouble("temp");
+                Double pressure = mainJSON.getDouble("pressure");
+                Integer humidity = mainJSON.getInt("humidity");
+                JSONArray weatherJSON = responseJSON.getJSONArray("weather");
+                String description = weatherJSON.getJSONObject(0).getString("description");
+                String icon = weatherJSON.getJSONObject(0).getString("icon");
+                JSONObject windJSON = responseJSON.getJSONObject("wind");
+                Double speed = windJSON.getDouble("speed");
+
+                CurrentWeather currentWeather = new CurrentWeather(name, tempMain, humidity, pressure, description, speed, icon, mContext);
+                currentWeatherList.add(currentWeather);
+                }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return currentWeatherList;
     }
 
     public ArrayList<Weather> processResults(Response response) {
@@ -87,7 +133,7 @@ public class WeatherService {
                     //get day of week from dateTime format
                     String dayOfWeek = "";
                     try {
-                        dayOfWeek = new SimpleDateFormat("E").format(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTime));
+                        dayOfWeek = new SimpleDateFormat("EEEE").format(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTime));
                         Log.d("Day Of Week ", dayOfWeek);
                     } catch (ParseException pe) {
                         Log.e("Exception: ", pe.toString());
