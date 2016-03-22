@@ -72,9 +72,7 @@ public class WeatherService {
         call.enqueue(callback);
     }
 
-    public ArrayList<CurrentWeather> processCurrentWeatherResults(Response response) {
-        ArrayList<CurrentWeather> currentWeatherList = new ArrayList<>();
-
+    public CurrentWeather processCurrentWeatherResults(Response response) {
         try {
             String jsonData = response.body().string();
             if (response.isSuccessful()) {
@@ -90,15 +88,14 @@ public class WeatherService {
                 JSONObject windJSON = responseJSON.getJSONObject("wind");
                 Double speed = windJSON.getDouble("speed");
 
-                CurrentWeather currentWeather = new CurrentWeather(name, tempMain, humidity, pressure, description, speed, icon, mContext);
-                currentWeatherList.add(currentWeather);
+                return new CurrentWeather(name, tempMain, humidity, pressure, description, speed, icon, mContext);
                 }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return currentWeatherList;
+        return null;
     }
 
     public ArrayList<Weather> processResults(Response response) {

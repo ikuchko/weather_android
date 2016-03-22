@@ -41,8 +41,16 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherV
     @Override
     public void onBindViewHolder(WeatherAdapter.WeatherViewHolder holder, int position) {
         holder.bindWeather(dayOfWeekList.get(position));
-        holder.dayRecycleView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
-        holder.dayRecycleView.setAdapter(new DayAdapter(context, weatherList));
+
+        ArrayList<Weather> hourWeatherList = new ArrayList<>();
+        for (int i=0; i<weatherList.size(); i++) {
+            if (weatherList.get(i).getmDayOfWeek().equals(dayOfWeekList.get(position))) {
+                hourWeatherList.add(weatherList.get(i));
+            }
+        }
+
+            holder.dayRecycleView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
+        holder.dayRecycleView.setAdapter(new DayAdapter(context, hourWeatherList));
     }
 
     @Override

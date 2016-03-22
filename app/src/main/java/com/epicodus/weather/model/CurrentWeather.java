@@ -1,6 +1,10 @@
 package com.epicodus.weather.model;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.util.Log;
+
+import com.epicodus.weather.R;
 
 /**
  * Created by Guest on 3/22/16.
@@ -30,24 +34,24 @@ public class CurrentWeather {
         return mName;
     }
 
-    public Double getmTempMain() {
-        return mTempMain;
+    public String getmTempMain() {
+        return (mTempMain.toString() + " ºF");
     }
 
-    public Integer getmHumidity() {
-        return mHumidity;
+    public String getmHumidity() {
+        return (mHumidity + " %");
     }
 
-    public Double getmPressure() {
-        return mPressure;
+    public String getmPressure() {
+        return (mPressure + " hPa");
     }
 
     public String getmDescription() {
         return mDescription;
     }
 
-    public Double getmWindSpeed() {
-        return mWindSpeed;
+    public String getmWindSpeed() {
+        return (mWindSpeed + " MPH");
     }
 
     public String getmIcon() {
@@ -56,5 +60,19 @@ public class CurrentWeather {
 
     public Context getmContext() {
         return mContext;
+    }
+
+    public Integer getImageId() {
+        Context context = mContext;
+        TypedArray imageHashMap = mContext.getResources().obtainTypedArray(R.array.icons);
+        TypedArray imageArray;
+        for (int i=0; i<imageHashMap.length(); i++) {
+            imageArray = mContext.getResources().obtainTypedArray(imageHashMap.getResourceId(i, -1));
+            Log.d("icon: ", imageArray.getString(0).toString());
+            if (imageArray.getString(0).toString().equals(mIcon)) {
+                return imageArray.getResourceId(1, -1);
+            }
+        }
+        return -1;
     }
 }

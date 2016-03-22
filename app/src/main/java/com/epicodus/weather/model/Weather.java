@@ -6,7 +6,11 @@ import android.util.Log;
 
 import com.epicodus.weather.R;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Guest on 3/21/16.
@@ -53,16 +57,25 @@ public class Weather {
         }
     }
 
+    public String getmDayOfWeek() { return mDayOfWeek; }
+
     public String getName() {
         return mName;
     }
 
     public String getDate() {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+            Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(mDate);
+            return dateFormat.format(date);
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
         return mDate;
     }
 
-    public Double getTempMain() {
-        return mTempMain;
+    public String getTempMain() {
+        return mTempMain.toString() + " ºF";
     }
 
     public Double getTempMax() {

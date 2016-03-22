@@ -10,7 +10,7 @@
     tools:context=".ui.ForecastActivity">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -23,6 +23,7 @@
             <ImageView
                 android:layout_width="250dp"
                 android:layout_height="250dp"
+                android:layout_marginTop="80dp"
                 android:src="@drawable/thunder_lightning_storm_icon"
                 android:id="@+id/currentWeatherImageView"
                 android:layout_centerInParent="true"
