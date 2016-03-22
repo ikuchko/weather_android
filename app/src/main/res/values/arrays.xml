@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="icons">
+        <item>@array/d01</item>
+        <item>@array/n01</item>
+        <item>@array/d02</item>
+        <item>@array/n02</item>
+        <item>@array/d03</item>
+        <item>@array/n03</item>
+        <item>@array/d04</item>
+        <item>@array/n04</item>
+        <item>@array/d09</item>
+        <item>@array/n09</item>
+        <item>@array/d10</item>
+        <item>@array/n10</item>
+        <item>@array/d11</item>
+        <item>@array/n11</item>
+        <item>@array/d13</item>
+        <item>@array/n13</item>
+        <item>@array/n50</item>
+        <item>@array/d50</item>
+    </array>
+
+    <array name="d01">
+        <item>01d</item>
+        <item>@drawable/status_weather_clear_icon</item>
+    </array>
+
+    <array name="n01">
+        <item>01n</item>
+        <item>@drawable/status_weather_clear_night_icon</item>
+    </array>
+
+    <array name="d02">
+        <item>02d</item>
+        <item>@drawable/status_weather_clouds_icon</item>
+    </array>
+
+    <array name="n02">
+        <item>02n</item>
+        <item>@drawable/status_weather_clouds_night_icon</item>
+    </array>
+
+    <array name="d03">
+        <item>03d</item>
+        <item>@drawable/cloudy_icon</item>
+    </array>
+
+    <array name="n03">
+        <item>03n</item>
+        <item>@drawable/cloudy_icon</item>
+    </array>
+
+    <array name="d04">
+        <item>04d</item>
+        <item>@drawable/status_weather_many_clouds_icon</item>
+    </array>
+
+    <array name="n04">
+        <item>04n</item>
+        <item>@drawable/status_weather_many_clouds_icon</item>
+    </array>
+
+    <array name="n09">
+        <item>09n</item>
+        <item>@drawable/status_weather_showers_scattered_icon</item>
+    </array>
+
+    <array name="d09">
+        <item>09d</item>
+        <item>@drawable/status_weather_showers_scattered_icon</item>
+    </array>
+
+    <array name="d10">
+        <item>10d</item>
+        <item>@drawable/status_weather_showers_day_icon</item>
+    </array>
+
+    <array name="n10">
+        <item>10n</item>
+        <item>@drawable/status_weather_showers_night_icon</item>
+    </array>
+
+    <array name="n11">
+        <item>11n</item>
+        <item>@drawable/thunder_lightning_storm_icon</item>
+    </array>
+
+    <array name="d11">
+        <item>11d</item>
+        <item>@drawable/thunder_lightning_storm_icon</item>
+    </array>
+
+    <array name="d13">
+        <item>13d</item>
+        <item>@drawable/status_weather_snow_icon</item>
+    </array>
+
+    <array name="n13">
+        <item>13n</item>
+        <item>@drawable/status_weather_snow_icon</item>
+    </array>
+
+    <array name="n50">
+        <item>50n</item>
+        <item>@drawable/mist</item>
+    </array>
+
+    <array name="d50">
+        <item>50d</item>
+        <item>@drawable/mist</item>
+    </array>
+</resources>

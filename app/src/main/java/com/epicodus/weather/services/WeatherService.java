@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.epicodus.weather.R;
 import com.epicodus.weather.model.Weather;
+import com.epicodus.weather.ui.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +24,8 @@ import okhttp3.Response;
  * Created by Guest on 3/21/16.
  */
 public class WeatherService {
-    private Context mContext;
+    public Context mContext;
+    public Context mPreviousActivityContext;
 
     public WeatherService (Context context) {
         this.mContext = context;
@@ -35,7 +37,7 @@ public class WeatherService {
         OkHttpClient client = new OkHttpClient.Builder()
                 .build();
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://api.openweathermap.org/data/2.5/forecast?APPID=" + CONSUMER_KEY).newBuilder();
+        HttpUrl.Builder urlBuilder = HttpUrl.parse("http://api.openweathermap.org/data/2.5/forecast?&units=imperial&APPID=" + CONSUMER_KEY).newBuilder();
         urlBuilder.addQueryParameter("q", location);
         String url = urlBuilder.build().toString();
 
@@ -69,14 +71,14 @@ public class WeatherService {
                     JSONArray weatherJSON = weatherDetailedJSON.getJSONArray("weather");
                     String mainWeather = weatherJSON.getJSONObject(0).getString("main");
                     String description = weatherJSON.getJSONObject(0).getString("description");
-                    String icon = "http://openweathermap.org/img/w/" + weatherJSON.getJSONObject(0).getString("icon") + ".png";
+                    String icon = weatherJSON.getJSONObject(0).getString("icon");
 
                     JSONObject windJSON = weatherDetailedJSON.getJSONObject("wind");
                     Double speed = windJSON.getDouble("speed");
 
                     String dateTime = weatherDetailedJSON.getString("dt_txt");
 
-                    Weather weather = new Weather(name, dateTime, tempMain, tempMax, tempMin, humidity, pressure, mainWeather, description, speed, icon);
+                    Weather weather = new Weather(mContext, name, dateTime, tempMain, tempMax, tempMin, humidity, pressure, mainWeather, description, speed, icon);
                     weatherList.add(weather);
                 }
             }

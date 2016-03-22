@@ -3,6 +3,8 @@ package com.epicodus.weather.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import android.widget.ListView;
 
 import com.epicodus.weather.R;
 import com.epicodus.weather.model.Weather;
+import com.epicodus.weather.services.WeatherAdapter;
 import com.epicodus.weather.services.WeatherService;
 
 import java.io.IOException;
@@ -24,7 +27,8 @@ import okhttp3.Response;
 public class ForecastActivity extends AppCompatActivity {
     private ArrayList<Weather> mWeatherList = new ArrayList<>();
     public static final String TAG = ForecastActivity.class.getSimpleName();
-    @Bind(R.id.weatherListView) ListView weatherListView;
+    @Bind(R.id.recyclerView) RecyclerView recyclerView;
+    private WeatherAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +64,11 @@ public class ForecastActivity extends AppCompatActivity {
                             weather[i] = mWeatherList.get(i).getDescription();
                         }
 
-                        ArrayAdapter adapter = new ArrayAdapter(ForecastActivity.this, android.R.layout.simple_list_item_1, weather);
-                        weatherListView.setAdapter(adapter);
+                        mAdapter = new WeatherAdapter(getApplicationContext(), mWeatherList);
+                        recyclerView.setAdapter(mAdapter);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ForecastActivity.this);
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setHasFixedSize(true);
 
                         Log.i(TAG, "Name: " + mWeatherList.get(0).getName());
                         Log.i(TAG, "Description: " + mWeatherList.get(0).getDescription());
